@@ -96,7 +96,7 @@ function quit(){
  * @returns {void}
  */
  function help(){
-  console.log("'hello' to say hello \n'quit' or 'exit' to quit \n'help' to list the commands")
+  console.log("'hello <any name>' to say hello with the name added \n'quit' or 'exit' to quit \n'help' to list the commands")
 }
 
 // The following line starts the application
