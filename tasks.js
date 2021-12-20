@@ -37,8 +37,12 @@ function onDataReceived(text) {
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
-  else if(text === 'hello\n'){
-    hello();
+  else if(text.trim().split(" ")[0] === 'hello'){
+    if(text.trim().split(" ")[1] !== undefined){
+      hello(text.trim().split(" ")[1]); 
+    }else{
+      hello("");
+    }
   }
   else if(text === 'help\n'){
     help();
@@ -66,8 +70,8 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
+function hello(name){
+  console.log(`hello ${name}!`);
 }
 
 
