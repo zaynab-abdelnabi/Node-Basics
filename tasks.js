@@ -81,6 +81,11 @@ function quit(){
   process.exit();
 }
 
+/**
+ * Help to display All the commands
+ *
+ * @returns {void}
+ */
  function help(){
   console.log("'hello' to say hello \n'quit' or 'exit' to quit \n'help' to list the commands")
 }
