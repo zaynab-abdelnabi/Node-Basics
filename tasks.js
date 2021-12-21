@@ -17,7 +17,7 @@ function startApp(name){
   console.log("--------------------")
 }
 
-var tasks=["task 1", "task 2"]
+var tasks=[]
 
 /**
  * Decides what to do depending on the data that was received
@@ -51,11 +51,26 @@ function onDataReceived(text) {
   else if(text === 'list\n'){
     list();
   }
+  else if(text.trim().split(" ")[0] === 'add'){
+    add(text);
+  }
   else{
     unknownCommand(text);
   }
 }
 
+function add(text){
+  var task = text.trim().split(" ");
+  task.shift();
+  task = task.join(' ');
+  if(task.trim()){
+    tasks.push(task);
+    console.log(`task added ${task}`);
+  }
+  else{
+    console.log("Please enter a task to add");
+  }
+}
 
 /**
  * prints "unknown command"
