@@ -17,6 +17,7 @@ function startApp(name){
   console.log("--------------------")
 }
 
+var tasks=["task 1", "task 2"]
 
 /**
  * Decides what to do depending on the data that was received
@@ -46,6 +47,9 @@ function onDataReceived(text) {
   }
   else if(text === 'help\n'){
     help();
+  }
+  else if(text === 'list\n'){
+    list();
   }
   else{
     unknownCommand(text);
@@ -97,6 +101,18 @@ function quit(){
  */
  function help(){
   console.log("'hello <any name>' to say hello with the name added \n'quit' or 'exit' to quit \n'help' to list the commands")
+}
+
+/**
+ * List the tasks
+ *
+ * @returns {void}
+ */
+ function list(){
+  tasks.map((task,index) => {
+    console.log(`${index+1} : ${task}`);
+  })
+
 }
 
 // The following line starts the application
