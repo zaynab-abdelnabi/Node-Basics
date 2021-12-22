@@ -54,11 +54,19 @@ function onDataReceived(text) {
   else if(text.trim().split(" ")[0] === 'add'){
     add(text);
   }
+  else if(text.trim().split(" ")[0] === 'remove'){
+    remove(text);
+  }
   else{
     unknownCommand(text);
   }
 }
 
+/**
+ * 
+ * @param  {string} text data typed by the user
+ * @returns {void}
+ */
 function add(text){
   var task = text.trim().split(" ");
   task.shift();
@@ -71,6 +79,30 @@ function add(text){
     console.log("Please enter a task to add");
   }
 }
+
+/**
+ * 
+ * @param  {string} text data typed by the user
+ * @returns {void}
+ */
+ function remove(text){
+   if(text.trim().split(" ")[1]){
+    var number = text.trim().split(" ")[1];
+    for(let i=0 ; i<tasks.length ;i++){
+      if(i == number-1){
+        tasks.splice(i,1);
+        console.log(`task ${number} removed`);
+        break;
+      }
+    }
+   }
+   else{
+     tasks.pop();
+     console.log("Last task removed");
+   }
+  
+}
+
 
 /**
  * prints "unknown command"
@@ -87,6 +119,7 @@ function unknownCommand(c){
 /**
  * Says hello
  *
+ * @param  {string} name the name received
  * @returns {void}
  */
 function hello(name){
