@@ -148,7 +148,14 @@ function quit(){
  * @returns {void}
  */
  function help(){
-  console.log("'hello <any name>' to say hello with the name added \n'quit' or 'exit' to quit \n'help' to list the commands")
+  console.log(`
+  'hello <any name>' to say hello with the name added 
+  'quit' or 'exit' to quit
+  'help' to list the commands
+  'add <task>' to add new tasks
+  'remove' to remove the last task
+  'remove <number>' to remove numbered task
+  'list' to list all the added tasks`);
 }
 
 /**
