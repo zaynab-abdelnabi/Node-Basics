@@ -193,7 +193,7 @@ function add(text){
 }
 
 /**
- * to check the tasks
+ * to uncheck the tasks
  * 
  * @param  {string} text data typed by the user
  * @returns {void}
@@ -261,10 +261,12 @@ function quit(){
   'hello <any name>' to say hello with the name added 
   'quit' or 'exit' to quit
   'help' to list the commands
+  'list' to list all the added tasks
   'add <task>' to add new tasks
   'remove' to remove the last task
   'remove <number>' to remove numbered task
-  'list' to list all the added tasks`);
+  'check <number>' to make the numbered task checked
+  'uncheck <number>' to make the numbered task unchecked`);
 }
 
 /**
