@@ -69,6 +69,12 @@ function onDataReceived(text) {
   else if(text.trim().split(" ")[0] === 'edit'){
     edit(text.trim());
   }
+  else if(text.trim().split(" ")[0] === 'check'){
+    check(text.trim());
+  }
+  else if(text.trim().split(" ")[0] === 'uncheck'){
+    uncheck(text.trim());
+  }
   else{
     unknownCommand(text);
   }
@@ -164,6 +170,48 @@ function add(text){
   
 }
 
+
+/**
+ * to check the tasks
+ * 
+ * @param  {string} text data typed by the user
+ * @returns {void}
+ */
+ function check(text){
+  var task = text.trim().split(" ");
+  task.shift();
+  if(isNaN(Number(task[0]))){
+    console.log('Enter the number of task that you want to check');
+
+  }else{
+    let number = Number(task[0]);
+    tasks[number-1].status = true;
+    console.log("Checked");
+    list();
+  }
+  
+}
+
+/**
+ * to check the tasks
+ * 
+ * @param  {string} text data typed by the user
+ * @returns {void}
+ */
+ function uncheck(text){
+  var task = text.trim().split(" ");
+  task.shift();
+  if(isNaN(Number(task[0]))){
+    console.log('Enter the number of task that you want to uncheck');
+
+  }else{
+    let number = Number(task[0]);
+    tasks[number-1].status = false;
+    console.log("Unchecked");
+    list();
+  }
+  
+}
 
 /**
  * prints "unknown command"
