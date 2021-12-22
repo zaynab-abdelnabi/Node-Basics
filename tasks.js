@@ -17,7 +17,16 @@ function startApp(name){
   console.log("--------------------")
 }
 
-var tasks=["go to grocery" , "go to supermarket"]
+var tasks=[
+  {
+    task:"go to the grocery",
+    status:true
+  },
+  {
+    task:"go get milk",
+    status:false
+  }
+];
 
 /**
  * Decides what to do depending on the data that was received
@@ -75,7 +84,11 @@ function add(text){
   task.shift();
   task = task.join(' ');
   if(task.trim()){
-    tasks.push(task);
+    let item ={
+      task : task.trim(),
+      status: false
+    }
+    tasks.push(item);
     console.log(`task added ${task}`);
   }
   else{
@@ -123,7 +136,7 @@ function add(text){
   if(isNaN(Number(task[0]))){
     task = task.join(' ');
     if(task.trim()){
-      tasks[tasks.length-1] = task;
+      tasks[tasks.length-1].task = task;
       console.log(`task edited to ${task}`);
       list();
     }
@@ -136,7 +149,7 @@ function add(text){
     task = task.join(' ');
     if(task.trim()){
       if(number <= tasks.length){
-        tasks[number-1] = task;
+        tasks[number-1].task = task;
         console.log(`task ${number} is edited to ${task}`);
         list();
       }
@@ -212,8 +225,14 @@ function quit(){
  * @returns {void}
  */
  function list(){
-  tasks.map((task,index) => {
-    console.log(`${index+1} : ${task}`);
+  tasks.map((item,index) => {
+    if(item.status){
+      console.log(`${index+1} - [✔] ${item.task}`);
+    }
+    else{
+      console.log(`${index+1} - [ ] ${item.task}`);
+    }
+
   })
 
 }
