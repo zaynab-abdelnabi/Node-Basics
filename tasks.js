@@ -17,7 +17,7 @@ function startApp(name){
   console.log("--------------------")
 }
 
-var tasks=[]
+var tasks=["go to grocery" , "go to supermarket"]
 
 /**
  * Decides what to do depending on the data that was received
@@ -88,6 +88,7 @@ function add(text){
  function remove(text){
    if(text.trim().split(" ")[1]){
     var number = text.trim().split(" ")[1];
+    var nbtasks = tasks.length;
     for(let i=0 ; i<tasks.length ;i++){
       if(i == number-1){
         tasks.splice(i,1);
@@ -95,6 +96,10 @@ function add(text){
         break;
       }
     }
+    if(nbtasks === tasks.length){
+      console.log(`Task ${number} is not exist`);
+    }
+
    }
    else{
      tasks.pop();
