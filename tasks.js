@@ -1,14 +1,17 @@
 const fs = require('fs');
+let fileName = 'database.json';
 
-let tasklists = fs.readFileSync('database.json');
+if(process.argv[2]){
+  fileName = process.argv[2];
+}
 
 try{
+  let tasklists = fs.readFileSync(fileName);
   var tasks = JSON.parse(tasklists).tasks;
-  console.log(tasks);
 }catch{
   var tasks = [];
   let data = JSON.stringify({tasks: tasks});
-  fs.writeFileSync('database.json', data);
+  fs.writeFileSync(fileName, data);
 }
 
 
@@ -251,9 +254,9 @@ function hello(name){
 function quit(){
   console.log('Quitting now, goodbye!')
   try {
-    fs.writeFile('database.json', JSON.stringify({tasks: tasks}), function writeJSON(err) {
+    fs.writeFile(fileName, JSON.stringify({tasks: tasks}), function writeJSON(err) {
       if (err) console.log(err);
-      console.log(`Data saved in database.json file`);
+      console.log(`Data saved in ${fileName} file`);
       process.exit();
     });
   } catch (error) {
