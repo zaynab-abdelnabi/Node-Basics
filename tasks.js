@@ -1,3 +1,16 @@
+const fs = require('fs');
+
+let tasklists = fs.readFileSync('database.json');
+
+try{
+  var tasks = JSON.parse(tasklists).tasks;
+  console.log(tasks);
+}catch{
+  var tasks = [];
+  let data = JSON.stringify({tasks: tasks});
+  fs.writeFileSync('database.json', data);
+}
+
 
 /**
  * Starts the application
@@ -16,17 +29,6 @@ function startApp(name){
   console.log(`Welcome to ${name}'s application!`)
   console.log("--------------------")
 }
-
-var tasks=[
-  {
-    task:"go to the grocery",
-    status:true
-  },
-  {
-    task:"go get milk",
-    status:false
-  }
-];
 
 /**
  * Decides what to do depending on the data that was received
@@ -95,7 +97,7 @@ function add(text){
       status: false
     }
     tasks.push(item);
-    console.log(`task added ${task}`);
+    console.log(`task added [${task}]`);
   }
   else{
     console.log("Please enter a task to add");
@@ -143,7 +145,7 @@ function add(text){
     task = task.join(' ');
     if(task.trim()){
       tasks[tasks.length-1].task = task;
-      console.log(`task edited to ${task}`);
+      console.log(`Last task edited to [${task}]`);
       list();
     }
     else{
@@ -156,7 +158,7 @@ function add(text){
     if(task.trim()){
       if(number <= tasks.length){
         tasks[number-1].task = task;
-        console.log(`task ${number} is edited to ${task}`);
+        console.log(`Task ${number} edited to [${task}]`);
         list();
       }
       else{
@@ -248,7 +250,15 @@ function hello(name){
  */
 function quit(){
   console.log('Quitting now, goodbye!')
-  process.exit();
+  try {
+    fs.writeFile('database.json', JSON.stringify({tasks: tasks}), function writeJSON(err) {
+      if (err) console.log(err);
+      console.log(`Data saved in database.json file`);
+      process.exit();
+    });
+  } catch (error) {
+    console.error('Data not saved');
+  }
 }
 
 /**
@@ -275,16 +285,19 @@ function quit(){
  * @returns {void}
  */
  function list(){
-  tasks.map((item,index) => {
-    if(item.status){
-      console.log(`${index+1} - [✔] ${item.task}`);
-    }
-    else{
-      console.log(`${index+1} - [ ] ${item.task}`);
-    }
-
-  })
-
+  if(tasks.length){
+    tasks.map((item,index) => {
+      if(item.status){
+        console.log(`${index+1} - [✔] ${item.task}`);
+      }
+      else{
+        console.log(`${index+1} - [ ] ${item.task}`);
+      }
+  
+    })
+  }else{
+    console.log("No tasks to list, add some tasks using add command");
+  }
 }
 
 // The following line starts the application
